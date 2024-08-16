@@ -51,12 +51,11 @@ while True:
         })
 
     try:
-        # Wait until the "Next" button is clickable and click it
         next_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.c-pagination__item > a.c-pagination__btn > span.c-icon--arrow-forward'))
         )
         next_button.click()
-        time.sleep(3)  # Wait for the next page to load
+        time.sleep(3)  
     except Exception as e:
         print("Tidak ada tombol Next atau tidak dapat diklik:", e)
         break
@@ -65,7 +64,6 @@ while True:
 driver.quit()
 
 def clean_filename(name):
-    # Menghapus karakter yang tidak valid untuk nama file
         return re.sub(r'[\\/*?:"<>|]', "", name)
 cleaned_nama_toko = clean_filename(nama_toko)
 file_name = f"{cleaned_nama_toko}.xlsx"
