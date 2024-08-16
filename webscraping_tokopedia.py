@@ -9,22 +9,6 @@ import random
 from datetime import datetime, timedelta
 import re
 
-# Hari ini
-today = datetime.today()
-
-# Tanggal 3 bulan yang lalu (dihitung sebagai 90 hari yang lalu)
-three_months_ago = today - timedelta(days=90)
-
-# Fungsi untuk menghasilkan tanggal acak dalam rentang yang ditentukan
-def generate_random_date(start_date, end_date):
-    # Menghitung selisih hari antara dua tanggal
-    delta = end_date - start_date
-    # Menghasilkan hari acak dalam rentang selisih hari
-    random_days = random.randint(0, delta.days)
-    # Menghasilkan tanggal acak
-    random_date = start_date + timedelta(days=random_days)
-    return random_date
-
 url = input("Masukkan url toko : ")
 
 if url :
@@ -32,7 +16,6 @@ if url :
     options.add_argument("--start-maximized")
     driver = webdriver.Chrome(options=options)
     driver.get(url)
-    z = 0
     data = []
     for i in range(0, 100):
         soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -55,15 +38,12 @@ if url :
                 review = container.find('span', attrs = {'data-testid':'lblItemUlasan'}).text
                 bintang1 = container.find('div', {'class': 'css-1w6pe1p'}).find('div', {'class': 'rating'}).get('aria-label')
                 bintang2 = int(bintang1.split()[1]) 
-                tanggal1 = generate_random_date(three_months_ago, today)
-                tanggal = "ditulis " + tanggal1.strftime("%Y-%m-%d")
                 data.append({
                     'Toko' : nama_toko,
                     'Produk' : nama_produk,
                     'Nama Reviewer' : reviewer,
                     'Komentar' : review,
-                    'Rating' : bintang2,
-                    'Tanggal' : tanggal
+                    'Rating' : bintang2
                 })
                 
             except AttributeError:

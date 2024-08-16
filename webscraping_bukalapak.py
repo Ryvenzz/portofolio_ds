@@ -27,8 +27,6 @@ while True:
                 nama = user_div.find('span', {'data-testid': 'reviewer-name'}).text.strip()
         else:
             nama = "Nama tidak ditemukan"
-        print(nama)
-        # nama = item.find('div', {'class': 'c-reviews-item__user'}).find('a',{'data-testid': 'reviewer-name'}).text.strip()
         komen1 = item.find('div', {'class': 'c-reviews-item__head-content'}).find('h4', {'class': 'c-reviews-item__title u-mrgn-top--1'}).text.strip()
         komen2 = item.find('p', {'data-testid': 'content'})
         if komen2:
