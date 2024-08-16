@@ -24,16 +24,13 @@ if url :
         for container in containers:
             try:
                 elements = container.find_all('a', {'class': 'styProduct'})
-                # Memfilter nama produk dan varian berdasarkan konten teks
                 nama_produk = None
                 varian_produk = None
                 for element in elements:
                     if "Varian:" not in element.text:
-                        # varian_produk = element.text.strip()
                         nama_produk = element.text.strip()
                     else:
                         nama_produk = element.text.strip()
-                # nama_produk = container.find('p', {'class': 'css-1ig3wia-unf-heading e1qvo2ff8'}).text.strip()
                 reviewer = container.find('span', {'class': 'name'}).text.strip()
                 review = container.find('span', attrs = {'data-testid':'lblItemUlasan'}).text
                 bintang1 = container.find('div', {'class': 'css-1w6pe1p'}).find('div', {'class': 'rating'}).get('aria-label')
@@ -55,7 +52,6 @@ if url :
     
     driver.quit()
     def clean_filename(name):
-    # Menghapus karakter yang tidak valid untuk nama file
         return re.sub(r'[\\/*?:"<>|]', "", name)
     cleaned_nama_toko = clean_filename(nama_toko)
     file_name = f"{cleaned_nama_toko}.xlsx"
